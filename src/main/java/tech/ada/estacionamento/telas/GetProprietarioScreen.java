@@ -5,10 +5,10 @@ import tech.ada.estacionamento.services.ClienteService;
 
 import java.util.Scanner;
 
-public class getProprietarioScreen {
+public class GetProprietarioScreen {
 	private final ClienteService clienteService;
 	private final Scanner scanner;
-	public getProprietarioScreen(ClienteService clienteService, Scanner scanner) {
+	public GetProprietarioScreen(ClienteService clienteService, Scanner scanner) {
 		this.clienteService = clienteService;
 		this.scanner = scanner;
 	}

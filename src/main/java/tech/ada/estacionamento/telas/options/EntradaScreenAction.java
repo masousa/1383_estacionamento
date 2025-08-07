@@ -2,27 +2,29 @@ package tech.ada.estacionamento.telas.options;
 
 import tech.ada.estacionamento.dominio.EntradaSaida;
 import tech.ada.estacionamento.dominio.Veiculo;
+import tech.ada.estacionamento.services.EntradaSaidaService;
 import tech.ada.estacionamento.services.VeiculoService;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class EntradaScreenAction implements ScreenAction {
-	private final VeiculoService veiculoService;
+	private final Veiculo veiculo;
 	private final Scanner scanner;
+	private final EntradaSaidaService entradaSaidaService;
 
-	public EntradaScreenAction(Scanner scanner, VeiculoService veiculoService) {
+	public EntradaScreenAction(Scanner scanner, Veiculo veiculo, EntradaSaidaService entradaSaidaService) {
 		this.scanner = scanner;
-		this.veiculoService = veiculoService;
+		this.veiculo = veiculo;
+		this.entradaSaidaService = entradaSaidaService;
 	}
 
 	@Override
 	public void execute() {
-		var entradaSaida = new EntradaSaida();
-		System.out.println("Informe a placa do veículo");
-		Veiculo veiculo = veiculoService.findByPlaca(scanner.next());
-		entradaSaida.setVeiculo(veiculo);
-		entradaSaida.setDataHoraEntrada(LocalDateTime.now());
+		var entrada = new EntradaSaida();
+		entrada.setVeiculo(veiculo);
+		entrada.setDataHoraEntrada(LocalDateTime.now());
+		entradaSaidaService.add(entrada);
 		System.out.println("Entrada realiza com sucesso");
 	}
 }
