@@ -1,16 +1,11 @@
 package tech.ada.estacionamento.telas.options;
 
 import tech.ada.estacionamento.dominio.EntradaSaida;
-import tech.ada.estacionamento.dominio.Veiculo;
 import tech.ada.estacionamento.services.EntradaSaidaService;
-import tech.ada.estacionamento.services.VeiculoService;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.Scanner;
 
 public class SaidaScreenAction implements ScreenAction {
