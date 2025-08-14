@@ -4,6 +4,8 @@ import tech.ada.estacionamento.dominio.Veiculo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class VeiculoService {
 	private final List<Veiculo> veiculoList;
@@ -17,11 +19,11 @@ public class VeiculoService {
 	}
 
 	public Veiculo findByPlaca(String numeroPlaca){
-		for (Veiculo veiculo: veiculoList){
-			if(veiculo.getPlaca().equals(numeroPlaca)){
-				return veiculo;
-			}
-		}
-		throw new RuntimeException("Não há veiculos cadastrados");
+		Optional<Veiculo> first = veiculoList.stream().filter(carro -> carro.getPlaca().equals(numeroPlaca))
+				.findFirst();
+
+		return first.orElseThrow();
+
+
 	}
 }
