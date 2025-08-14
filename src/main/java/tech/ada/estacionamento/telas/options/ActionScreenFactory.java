@@ -10,7 +10,6 @@ import tech.ada.estacionamento.telas.GetProprietarioScreen;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 public class ActionScreenFactory {
 
@@ -35,15 +34,15 @@ public class ActionScreenFactory {
 			case REGISTRAR_ENTRADA -> screenAction = new EntradaScreenAction(scanner,
 					new GetVeiculoScreen(scanner,veiculoService).getVeiculo(), entradaSaidaService);
 
-			case REGISTRAR_SAIDA -> consumer= this::registrarSaida;
+			case REGISTRAR_SAIDA -> screenAction= this::registrarSaida;
 
-			default -> consumer = sc -> System.out.println("Obrigado por utilizar nossos sistemas");
+			default -> screenAction = () -> System.out.println("Obrigado por utilizar nossos sistemas");
 		}
 
 		screenAction.execute();
 	}
 
-	private void registrarSaida(Scanner scanner) {
+	private void registrarSaida() {
 		System.out.println("Informar a placa do  veiculo");
 		String placaVeiculo = scanner.next();
 
