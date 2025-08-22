@@ -6,6 +6,7 @@ import tech.ada.estacionamento.services.EntradaSaidaService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class SaidaScreenAction implements ScreenAction {
@@ -21,8 +22,10 @@ public class SaidaScreenAction implements ScreenAction {
 		System.out.println("Informar a placa do  veiculo");
 		String placaVeiculo = scanner.next();
 
-		EntradaSaida saida = entradaSaidaService.findByPlaca(placaVeiculo);
-		saida.setDataHoraSaida(LocalDateTime.now());
+		Optional<EntradaSaida> optSaida = entradaSaidaService.sair(placaVeiculo);
+
+		EntradaSaida saida = optSaida.get();
+
 		LocalDateTime horaEntrada = saida.getDataHoraEntrada();
 		LocalDateTime horaSaida = saida.getDataHoraSaida();
 		long horas = ChronoUnit.HOURS.between(horaEntrada,horaSaida);

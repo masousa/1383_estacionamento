@@ -14,8 +14,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class ClientePersistence {
-	private Path caminhoArquivo;
+	private final Path caminhoArquivo;
 	public ClientePersistence(){
 		try {
 			caminhoArquivo = getPath();
@@ -36,7 +37,15 @@ public class ClientePersistence {
 	}
 
 	public List<Proprietario> getAll(){
+
+
+		 /*return Files.lines(caminhoArquivo).map(this::converter)
+				 .toList();*/
+
 		List<Proprietario> proprietarios = new ArrayList<>();
+		/*return Files.lines(caminhoArquivo).map(this::converter)
+				.forEachOrdered(proprietarios::add);*/
+
 		try(BufferedReader reader = Files.newBufferedReader(caminhoArquivo)){
 			String linha;
 
