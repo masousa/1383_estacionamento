@@ -3,6 +3,7 @@ package tech.ada.estacionamento.telas;
 import tech.ada.estacionamento.dominio.Veiculo;
 import tech.ada.estacionamento.services.VeiculoService;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class GetVeiculoScreen {
@@ -17,7 +18,13 @@ public class GetVeiculoScreen {
 	public Veiculo getVeiculo(){
 		System.out.println("Informe a placa do veículo");
 		var placa = scanner.next();
-		return veiculoService.findByPlaca(placa);
+		Optional<Veiculo> optionalVeiculo= veiculoService.findByPlaca(placa);
+		if(optionalVeiculo.isPresent()){
+			return optionalVeiculo.get();
+		} else{
+			System.err.println("Veiculo não encontrado");
+			return getVeiculo();
+		}
 	}
 
 

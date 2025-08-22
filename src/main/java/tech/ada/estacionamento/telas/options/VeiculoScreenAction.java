@@ -10,10 +10,12 @@ import java.util.Scanner;
 public class VeiculoScreenAction implements ScreenAction{
 	private final Scanner scanner;
 	private final VeiculoService veiculoService;
+	private final Proprietario proprietario;
 
 	public VeiculoScreenAction(Scanner scanner, VeiculoService veiculoService, Proprietario proprietario) {
 		this.scanner = scanner;
 		this.veiculoService = veiculoService;
+		this.proprietario = proprietario;
 	}
 
 	@Override
@@ -30,6 +32,7 @@ public class VeiculoScreenAction implements ScreenAction{
 		veiculo.setTipo(TipoVeiculo.getFromOrdinal(scanner.nextInt()));
 		System.out.println("Informe a cor do seu veiculo");
 		veiculo.setCor(scanner.next());
+		veiculo.setProprietario(proprietario);
 		veiculoService.add(veiculo);
 		System.out.println("Veiculo adicionado com sucesso");
 	}
