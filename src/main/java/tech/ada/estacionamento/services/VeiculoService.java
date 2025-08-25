@@ -1,29 +1,26 @@
 package tech.ada.estacionamento.services;
 
 import tech.ada.estacionamento.dominio.Veiculo;
+import tech.ada.estacionamento.persistence.VeiculoPersistence;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 public class VeiculoService {
 	private final List<Veiculo> veiculoList;
-
+	private final VeiculoPersistence veiculoPersistence;
 	public VeiculoService(){
-		this.veiculoList = new ArrayList<>();
+		this.veiculoPersistence = new VeiculoPersistence();
+		this.veiculoList = veiculoPersistence.getAll();
 	}
 
 	public void add(Veiculo veiculo){
 		veiculoList.add(veiculo);
+		veiculoPersistence.add(veiculo);
 	}
 
-	public Veiculo findByPlaca(String numeroPlaca){
-		Optional<Veiculo> first = veiculoList.stream().filter(carro -> carro.getPlaca().equals(numeroPlaca))
-				.findFirst();
-
-		return first.orElseThrow();
-
-
+	public Optional<Veiculo> findByPlaca(String numeroPlaca){
+		return veiculoList.stream().filter(carro -> carro.getPlaca()
+						.equals(numeroPlaca)).findFirst();
 	}
 }

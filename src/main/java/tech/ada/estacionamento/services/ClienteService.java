@@ -3,8 +3,8 @@ package tech.ada.estacionamento.services;
 import tech.ada.estacionamento.dominio.Proprietario;
 import tech.ada.estacionamento.persistence.ClientePersistence;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ClienteService {
 
@@ -22,13 +22,12 @@ public class ClienteService {
 		clientePersistence.add(proprietario);
 	}
 
-	public Proprietario findByCPF(String cpf){
-		for (Proprietario proprietario : proprietarios){
-			if(proprietario.getCpf().equals(cpf)){
-				return proprietario;
-			}
 
-		}
-		throw new RuntimeException("cpf não encontrado");
+
+	public Optional<Proprietario> findByCPF(String cpf){
+		return proprietarios.stream()
+				.filter(proprietario -> proprietario.getCpf()
+						.equals(cpf)).findFirst();
+
 	}
 }
